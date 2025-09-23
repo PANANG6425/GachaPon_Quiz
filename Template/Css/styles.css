@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+body { font-family: 'Kanit', sans-serif; }
+
+.gacha-machine {
+  background: linear-gradient(145deg, #ff6b6b, #ff8e8e);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(255, 107, 107, 0.3);
+}
+.gacha-button {
+  background: linear-gradient(145deg, #ffd93d, #ffed4e);
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(255, 217, 61, 0.4);
+  transition: transform .2s ease;
+}
+.question-card {
+  background: linear-gradient(145deg, #667eea, #764ba2);
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+  animation: slideIn 0.4s ease-out;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.category-badge {
+  background: linear-gradient(145deg, #4facfe, #00f2fe);
+  border-radius: 20px;
+  padding: 5px 15px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.stats-card {
+  background: linear-gradient(145deg, #a8edea, #fed6e3);
+  border-radius: 10px;
+  padding: 15px;
+}
+.spin { animation: spin 0.8s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.shake { animation: shake .6s ease-in-out both; }
+@keyframes shake {
+  0%,100%{ transform: translateX(0); }
+  20%{ transform: translateX(-6px); }
+  40%{ transform: translateX(6px); }
+  60%{ transform: translateX(-3px); }
+  80%{ transform: translateX(3px); }
+}
+.slot {
+  letter-spacing: .1em;
+  font-weight: 700;
+  text-shadow: 0 2px 6px rgba(0,0,0,.25);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{ transform: scale(1); opacity:.9; } 50%{ transform: scale(1.04); opacity:1; } }
+
+/* Form input/button styles */
+.input-field {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: 0.2s;
+}
+.input-field:focus { border-color: #7f56d9; box-shadow: 0 0 0 2px rgba(127,86,217,0.2); }
+.btn-add { background-color: #22c55e; color: white; font-weight: bold; border-radius: 0.5rem; transition: 0.2s; }
+.btn-add:hover { background-color: #16a34a; }
+.btn-clear { background-color: #e5e7eb; color: #1f2937; border-radius: 0.5rem; transition: 0.2s; }
+.btn-clear:hover { background-color: #d1d5db; }
