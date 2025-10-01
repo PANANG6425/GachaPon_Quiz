@@ -43,7 +43,36 @@
               รีเซ็ตไม่ซ้ำ
             </button>
           </div>
+                          <!-- ปุ่มเรียกกติกา -->
+      <div class="text-center mb-6">
+        <button id="rulesBtn" class="bg-white/30 hover:bg-white/50 text-white px-4 py-2 rounded-lg">
+          📖 วิธีเล่น / กติกา
+        </button>
+      </div>
 
+        <!-- Modal -->
+        <div id="rulesModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+          <div class="bg-white rounded-lg p-6 max-w-lg mx-4 relative">
+            <!-- ปุ่มปิด -->
+            <button id="closeModal" class="absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-lg font-bold">&times;</button>
+
+            <h2 class="text-2xl font-bold mb-4">🧾 วิธีการใช้งาน & กติกา</h2>
+            <p class="mb-2">
+              🔹 กดปุ่ม <strong>🎲 สุ่มโจทย์</strong> เพื่อรับโจทย์ใหม่
+            </p>
+            <p class="mb-2">
+              🔹 เลือกหมวดหมู่ที่ต้องการ หรือเปิดโหมด <strong>สุ่มไม่ซ้ำ</strong>
+            </p>
+            <p class="mb-2">
+              🔹 สามารถกด <kbd class="bg-gray-200 px-1 rounded">Space</kbd> เพื่อสุ่มโจทย์ได้เช่นกัน
+            </p>
+            <p class="mb-2">
+              🎮 **วิธีเล่นกับเพื่อน/กลุ่ม:**  
+              - เล่น 2 คนขึ้นไป สลับตอบโจทย์ หรือแข่งตอบเร็ว  
+              - ในห้องเรียน ครูสุ่มโจทย์ นักเรียนแบ่งทีมแข่งตอบ จับเวลา และให้คะแนนได้
+            </p>
+          </div>
+        </div>
           <!-- Gacha Button + animation hint -->
           <div class="relative">
             <button id="gachaBtn" class="gacha-button w-28 h-28 mx-auto mb-3 flex items-center justify-center text-4xl">
@@ -75,7 +104,7 @@
           </div>
         </div>
       </div>
-
+      
       <!-- Control Panel -->
       <div class="space-y-6">
         <!-- Stats -->
@@ -150,7 +179,7 @@
       </div>
     </div>
   </div>
-
+ 
 <script src="JS/scripts.js"></script>
 
 </body>

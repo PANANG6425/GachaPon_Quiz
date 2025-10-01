@@ -32,7 +32,9 @@ const csvStatus = document.getElementById('csvImportStatus');
 const categoryNameInput = document.getElementById('newCategoryName');
 const addCategoryBtn = document.getElementById('addCategoryBtn');
 const categoryListEl = document.getElementById('categoryList');
-
+const rulesBtn = document.getElementById('rulesBtn');
+const rulesModal = document.getElementById('rulesModal');
+const closeModal = document.getElementById('closeModal');
 const csvFiles = [
   "data/math.csv",
   "data/science.csv",
@@ -535,3 +537,19 @@ function normalize(text) {
 function escapeHtml(s = '') {
   return s.replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 }
+ rulesBtn.addEventListener('click', () => {
+    rulesModal.classList.remove('hidden');
+    rulesModal.classList.add('flex');
+  });
+
+  closeModal.addEventListener('click', () => {
+    rulesModal.classList.add('hidden');
+    rulesModal.classList.remove('flex');
+  });
+
+  // ปิด modal ถ้าคลิกนอกกล่อง
+  rulesModal.addEventListener('click', (e) => {
+    if (e.target === rulesModal) {
+      rulesModal.classList.add('hidden');
+      rulesModal.classList.remove('flex');
+    }});
