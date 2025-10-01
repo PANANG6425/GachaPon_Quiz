@@ -33,6 +33,15 @@ const categoryNameInput = document.getElementById('newCategoryName');
 const addCategoryBtn = document.getElementById('addCategoryBtn');
 const categoryListEl = document.getElementById('categoryList');
 
+const csvFiles = [
+  "data/math.csv",
+  "data/science.csv",
+  "data/thai.csv",
+  "data/english.csv",
+  "data/social.csv"
+];
+
+
 renderCategoryOptions();
 renderCategoryList();
 updateStats();
@@ -404,6 +413,42 @@ function renderCategoryOptions() {
     categoryEl.value = '';
   }
 }
+async function preloadCSV() {
+  for (const file of csvFiles) {
+    try {
+      const res = await fetch(file);
+      const text = await res.text();
+      const rows = parseCSV(text);
+      // ข้าม header ถ้ามี
+      for (let i = 1; i < rows.length; i++) {
+        const [title, content, categoryName] = rows[i];
+        if (!title || !content || !categoryName) continue;
+
+        let category = findCategoryByName(categoryName);
+        if (!category) {
+          category = createCategoryRecord(categoryName);
+          categories.push(category);
+        }
+        questions.push({
+          id: Date.now() + Math.floor(Math.random() * 1000),
+          title: title.trim(),
+          content: content.trim(),
+          categoryId: category.id,
+          drawCount: 0
+        });
+      }
+    } catch (err) {
+      console.warn(`โหลดไม่ได้: ${file}`, err);
+    }
+  }
+
+  renderCategoryOptions();
+  renderCategoryList();
+  updateStats();
+  renderQuestionList();
+}
+
+preloadCSV();
 
 function renderCategoryList() {
   if (!categoryListEl) return;
