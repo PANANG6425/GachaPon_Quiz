@@ -553,3 +553,68 @@ function escapeHtml(s = '') {
       rulesModal.classList.add('hidden');
       rulesModal.classList.remove('flex');
     }});
+
+
+function testRandomizerStatsFull(times = 100) {
+  const results = []; // เก็บทุกครั้ง (รวมซ้ำ)
+  const uniqueResultsSet = new Set(); // เก็บ ID ไม่ซ้ำ
+
+  for (let i = 0; i < times; i++) {
+    const list = getFilteredQuestions();
+    if (list.length === 0) break;
+
+    let q;
+    if (noRepeatToggle && noRepeatToggle.checked) {
+      q = getRandomNoRepeat(list);
+      if (!q) {
+        usedIdsByKey.set(getUsedKey(), new Set());
+        q = getRandomNoRepeat(list);
+      }
+    } else {
+      q = list[Math.floor(Math.random() * list.length)];
+    }
+
+    if (!q) continue;
+
+    results.push(q.id);        // เก็บซ้ำ
+    uniqueResultsSet.add(q.id); // เก็บไม่ซ้ำ
+  }
+
+  if (results.length === 0) {
+    console.log("ไม่มีโจทย์ให้สุ่ม");
+    return;
+  }
+
+  // =========================
+  // แบบรวมทุกครั้ง (รวมซ้ำ)
+  const freqAll = {};
+  results.forEach((id) => { freqAll[id] = (freqAll[id] || 0) + 1; });
+  const countsAll = Object.values(freqAll).sort((a,b) => a-b);
+
+  const sumAll = countsAll.reduce((a,b) => a+b, 0);
+  const minAll = Math.min(...countsAll);
+  const maxAll = Math.max(...countsAll);
+  const medianAll = countsAll.length % 2 === 1 
+    ? countsAll[Math.floor(countsAll.length/2)]
+    : (countsAll[countsAll.length/2 -1] + countsAll[countsAll.length/2])/2;
+
+  // =========================
+  // แบบนับเฉพาะ ID ไม่ซ้ำ
+  const countsUnique = Array.from(uniqueResultsSet).map(id => freqAll[id]).sort((a,b)=>a-b);
+  const sumUnique = countsUnique.reduce((a,b)=>a+b,0);
+  const minUnique = Math.min(...countsUnique);
+  const maxUnique = Math.max(...countsUnique);
+  const medianUnique = countsUnique.length % 2 === 1 
+    ? countsUnique[Math.floor(countsUnique.length/2)]
+    : (countsUnique[countsUnique.length/2 -1] + countsUnique[countsUnique.length/2])/2;
+
+  console.log("=== สรุปการสุ่ม (รวมซ้ำ) ===");
+  console.log("จำนวนครั้งทั้งหมด:", results.length);
+  console.log("จำนวน ID ไม่ซ้ำ:", Object.keys(freqAll).length);
+  console.log("Sum =", sumAll, "Min =", minAll, "Max =", maxAll, "Median =", medianAll);
+  console.log("ความถี่แต่ละ ID:", freqAll);
+
+  console.log("\n=== สรุปการสุ่ม (ไม่ซ้ำ ID) ===");
+  console.log("จำนวน ID ไม่ซ้ำ:", uniqueResultsSet.size);
+  console.log("Sum =", sumUnique, "Min =", minUnique, "Max =", maxUnique, "Median =", medianUnique);
+}
